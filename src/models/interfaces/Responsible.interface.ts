@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IAddresInformation } from './utils.interface';
+import { IAddresInformation, IContatcInformation } from './utils.interface';
 
 const ResponsiblleZodSchema = z.object({
   name: z.string({
@@ -16,16 +16,11 @@ const ResponsiblleZodSchema = z.object({
     required_error: 'O campo "Senha" deve estar preenchido!',
     invalid_type_error: 'O campo "Senha" deve ser uma string!',
   }).min(8, { message: 'O campo "Senha" deve ter no mínimo 8 letras' }),
-  contactInformation: z.object({
-    telephoneOne: z.string({
-      required_error: 'O campo "Telefone Principal" deve estar preenchido!',
-      invalid_type_error: 'O campo "Telefone Principal" deve ser uma string!',
-    }).length(17, { message: 'O Telefone Principal deve ter 17 caracteres' }),
-    telephoneTwo: z.string(),
-  }),
+  contactInformation: IContatcInformation,
   addresInformation: IAddresInformation,
-  myResponsible: z.array(z.string()),
+  myResponsibles: z.array(z.string()),
   photo: z.string(),
+  comments: z.string(),
 });
 
 type IResponsible = z.infer<typeof ResponsiblleZodSchema>;

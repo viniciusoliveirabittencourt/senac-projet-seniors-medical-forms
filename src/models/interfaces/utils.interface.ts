@@ -37,6 +37,14 @@ const IAddresInformation = z.object({
   }).length(9, 'CEP tem que ter exatamente 9 caracters!'),
 });
 
+const IContatcInformation = z.object({
+  telephoneOne: z.string({
+    required_error: 'O campo "Telefone Principal" deve estar preenchido!',
+    invalid_type_error: 'O campo "Telefone Principal" deve ser uma string!',
+  }).length(17, { message: 'O Telefone Principal deve ter 17 caracteres' }),
+  telephoneTwo: z.string(),
+});
+
 const ISeniorsObjectInformationNoTime = z.object({
   medicationName: z.string({
     required_error: 'O campo "Medicamento" deve estar preenchido!',
@@ -54,12 +62,17 @@ const ISeniorsObjectInformationTime = z.object({
     required_error: 'O campo "Horário" deve estar preenchido!',
     invalid_type_error: 'O campo "Horário" deve ser um Number!',
   })
-    .min(-1, { message: 'Horário não pode ser menor que -1' })
-    .max(23, { message: 'Horário não pode ser maior que 23' }),
+    .min(-1, { message: 'Horário não pode ser menor que -1!' })
+    .max(23, { message: 'Horário não pode ser maior que 23!' }),
   observation: z.string(),
 });
 
 const ISeniorArrayInformationNoTime = z.array(ISeniorsObjectInformationNoTime);
 const ISeniorArrayInformationTime = z.array(ISeniorsObjectInformationTime);
 
-export { IAddresInformation, ISeniorArrayInformationNoTime, ISeniorArrayInformationTime };
+export {
+  IAddresInformation,
+  ISeniorArrayInformationNoTime,
+  ISeniorArrayInformationTime,
+  IContatcInformation,
+};
