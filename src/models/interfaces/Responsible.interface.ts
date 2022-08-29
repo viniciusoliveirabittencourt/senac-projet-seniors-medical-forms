@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { IAddresInformation } from './utils.interface';
 
 const ResponsiblleZodSchema = z.object({
   name: z.string({
@@ -22,43 +23,9 @@ const ResponsiblleZodSchema = z.object({
     }).length(17, { message: 'O Telefone Principal deve ter 17 caracteres' }),
     telephoneTwo: z.string(),
   }),
-  addresInformation: z.object({
-    country: z.string({
-      required_error: 'O campo "País" deve estar preenchido!',
-      invalid_type_error: 'O campo "País" deve ser uma string!',
-    })
-      .min(3, { message: 'Não existe país com menos de 3 letras!' })
-      .max(46, { message: 'Não existe país com mais de 46 letras!' }),
-    state: z.string({
-      required_error: 'O campo "Estado" deve estar preenchido!',
-      invalid_type_error: 'O campo "Estado" deve ser uma string!',
-    })
-      .min(3, { message: 'Não existe estado com menos de 3 letras!' })
-      .max(20, { message: 'Não existe estado com mais de 20 letras!' }),
-    city: z.string({
-      required_error: 'O campo "Cidade" deve estar preenchido!',
-      invalid_type_error: 'O campo "Cidade" deve ser uma string!',
-    })
-      .min(3, { message: 'Não existe cidade com menos de 3 letras!' })
-      .max(29, { message: 'Não existe cidade com mais de 29 letras!' }),
-    neighborhood: z.string({
-      required_error: 'O campo "Bairro" deve estar preenchido!',
-      invalid_type_error: 'O campo "Bairro" deve ser uma string!',
-    })
-    .min(3, { message: 'Não existe Bairro com menos de 3 letras!' })
-    .max(40, { message: 'Não existe cidade com mais de 40 letras!' }),
-    publicPlace: z.string({
-      required_error: 'O campo "Logradouro" deve estar preenchido!',
-      invalid_type_error: 'O campo "Logradouro" deve ser uma string!',
-    })
-    .min(4, { message: 'Logradouro deve possuir mais de 4 letras!' }),
-    complement: z.string(),
-    cep: z.string({
-      required_error: 'O campo "CEP" deve estar preenchido!',
-      invalid_type_error: 'O campo "CEP" deve ser uma string!',
-    }).length(9, 'CEP tem que ter exatamente 9 caracters!'),
-  }),
+  addresInformation: IAddresInformation,
   myResponsible: z.array(z.string()),
+  photo: z.string(),
 });
 
 type IResponsible = z.infer<typeof ResponsiblleZodSchema>;
