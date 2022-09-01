@@ -19,6 +19,12 @@ enum bloodTypeEnum {
   'RH Nulo',
 }
 
+enum gender {
+  'Masculino',
+  'Feminino',
+  'Não Identificado',
+}
+
 const SeniorZodSchema = z.object({
   name: z.string({
     required_error: 'O campo "Nome" deve estar preenchido!',
@@ -28,12 +34,7 @@ const SeniorZodSchema = z.object({
     required_error: 'O campo "Data de Nascimento" deve estar preenchido!',
     invalid_type_error: 'O campo "Data de Nascimento" deve ser uma string!',
   }).length(10, { message: 'O campo "Data de Nascimento" deve 10 caracteres' }),
-  gender: z.number({
-    required_error: 'O campo "Gênero" deve estar preenchido!',
-    invalid_type_error: 'O campo "Gênero" deve ser um Number!',
-  })
-    .min(0, { message: 'Gênero não pode ter o value menor que 0!' })
-    .max(3, { message: 'Gênero não pode ter o valor maior que 3!' }),
+  gender: z.nativeEnum(gender),
   height: z.string({
     required_error: 'O campo "Altura" deve estar preenchido!',
     invalid_type_error: 'O campo "Altura" deve ser uma string!',

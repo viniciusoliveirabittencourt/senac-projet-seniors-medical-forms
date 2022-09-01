@@ -20,4 +20,4 @@ export default class ResponsibleMod extends MongoModel<IResponsible> {
   constructor(model = mongooseCreateModel('Responsible', responsibleSchema)) {
     super(model);
   }
-}
+};
