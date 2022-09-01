@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "mongoose": "^6.5.3",
+    "mongodb": "^4.9.1",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^18.7.13",
+    "@types/react": "^18.0.18",
     "@vercel/node": "^2.5.11",
     "dotenv": "^16.0.1",
     "eslint": "8.23.0",
