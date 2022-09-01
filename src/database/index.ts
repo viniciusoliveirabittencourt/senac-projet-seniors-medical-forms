@@ -11,6 +11,10 @@ const connectToDatabase = async (uri: string) => {
 
   const db = client.db(dbName);
 
+  client.once('open', () => {
+
+  })
+
   return db;
 };
 
