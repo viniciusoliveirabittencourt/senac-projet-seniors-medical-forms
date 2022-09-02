@@ -1,6 +1,7 @@
 import { Form, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import ContactInformation from './ContactInformation';
+import AddresInformation from './AddresInformation';
 
 export default function GeneralForm () {
   const [contactInform, setContactInforma] = useState();
@@ -26,6 +27,12 @@ export default function GeneralForm () {
         </Col>
       </Row>
       <ContactInformation setContact={ setContact } setEmailValid={ setEmailValid } setEmailInvalid={ setEmailInvalid } />
+      <Row className="justify-content-md-center">
+        <Col xs lg="10">
+          <h3>Informações de Endereço -</h3>
+        </Col>
+      </Row>
+      <AddresInformation />
     </>
   );
 }
