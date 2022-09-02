@@ -1,8 +1,8 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Email from '../components/Email';
-import Password from '../components/Password';
+import Email from '../../components/Email';
+import Password from '../../components/Password';
 
 export async function getStaticProps(context) {
   return {
@@ -57,8 +57,8 @@ export default function Home() {
     <Container>
       <Row className="justify-content-md-center">
         <Row className="justify-content-md-center">
-          <Col xs lg="2">
-            <h1>Login:</h1>
+          <Col xs lg="5">
+            <h1>Cadastre-se:</h1>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
