@@ -2,19 +2,14 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import Email from '../../components/Email';
-import Password from '../../components/Password';
-import GeneralForm from '../../components/GeneralForm';
-import Name from '../../components/Name'
+import Email from '../../../components/Email';
+import Password from '../../../components/Password';
+import GeneralForm from '../../../components/GeneralForm';
+import Name from '../../../components/Name'
 import axios from 'axios';
 
-export async function getStaticProps() {
-  return {
-    props: {},
-  }
-}
-
 export default function Home() {
+  const [user, setUser] = useState();
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [password, setPassword] = useState('');
@@ -27,21 +22,44 @@ export default function Home() {
   const [file, setFile] = useState();
   const [carregando, setCarregando] = useState(false);
   const router = useRouter();
+  console.log(user);
+
+  const getUser = async () => {
+    try {
+      const body = {
+        email: router.query.id
+      }
+      const { data: message } = await axios.post('/api/getUserInfo', body, { headers: { 'Content-Type': 'application/json' } });
+      setUser(message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [])
 
   const handleSubmit = async () => {
     try {
       setCarregando(true);
-      const mySeniors = [];
       const body = {
-        file,
+        photo: user.message.photo,
         email,
         password,
         name,
-        ...generalForm,
-        mySeniors: []
+        'contactInformation.telephoneOne': generalForm.contactInformation.telephoneOne,
+        'contactInformation.telephoneTwo': generalForm.contactInformation.telephoneTwo,
+        'addresInformation.cep': generalForm.addresInformation.cep,
+        'addresInformation.country': generalForm.addresInformation.country,
+        'addresInformation.city': generalForm.addresInformation.city,
+        'addresInformation.neiborhood': generalForm.addresInformation.neiborhood,
+        'addresInformation.publicPlace': generalForm.addresInformation.publicPlace,
+        'addresInformation.state': generalForm.addresInformation.state,
+        mySeniors: user.message.mySeniors,
       }
-      await axios.post('/api/createResponsible', body, { headers: { 'Content-Type': 'multipart/form-data' } });
-      router.push('/')
+      await axios.put('/api/updateUser', body, { headers: { 'Content-Type': 'application/json', id: router.query.id } });
+      router.push(`/responsible/${router.query.id}`)
       setCarregando(false);
     } catch (e) {
       console.log(e);
@@ -61,21 +79,6 @@ export default function Home() {
         setButton(true);
       }
   }, [validEmail, validPassword, validName, validGeneralForm]);
-
-  const resObj = {
-    contactInformation: {
-      telephoneOne: '',
-      telephoneTwo: '',
-    },
-    addresInformation: {
-      cep: '',
-      city: '',
-      country: '',
-      neiborhood: '',
-      publicPlace: '',
-      state: '',
-    }
-  }
 
   const setGeneralFormFunc = (e) => {
     setGeneralForm(e);
@@ -126,17 +129,20 @@ export default function Home() {
   }
 
   return (
+    user ?
     <Container>
       <Row className="justify-content-md-center">
-        <Row className="justify-content-md-center">
-          <Col xs lg="10">
-            <h1>Cadastre-se:</h1>
+      <Row className="justify-content-md-center">
+          <Col xs lg="2">
+            <Form>
+              <img src={ user.message.photo } className='photoUp my-3' />
+            </Form>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
             <Form>
-              <Name value={ '' } setInvalidname={ setInvalidname } nameHandler={ nameHandler } setValidname={ setValidName } />
+              <Name value={ user.message.name } setInvalidname={ setInvalidname } nameHandler={ nameHandler } setValidname={ setValidName } />
             </Form>
           </Col>
         </Row>
@@ -148,16 +154,34 @@ export default function Home() {
         <Row className="justify-content-md-center">
           <Col xs lg="5">
             <Form>
-              <Email value={ '' } setInvalidEmail={ setEmaiInvalid } setValidEmail={ setEmailValid } emailHandler={ handlerEmail } />
+              <Email value={ user.message.email } setInvalidEmail={ setEmaiInvalid } setValidEmail={ setEmailValid } emailHandler={ handlerEmail } />
             </Form>
           </Col>
           <Col xs lg="5">
             <Form>
-              <Password value={ '' } setInvalidPassword={ setPasswordInvalid } setValidPassword={ setPasswordValid } passwordHandler={ handlerPassword } />
+              <Password value={ user.message.password } setInvalidPassword={ setPasswordInvalid } setValidPassword={ setPasswordValid } passwordHandler={ handlerPassword } />
             </Form>
           </Col>
         </Row>
-        <GeneralForm setGeneralForm={ setGeneralFormFunc } setGeneralValid={ validGeneralFormFunc } setGeneralInvalid={ invalidGeneralFormFunc } apiRes={ resObj } />
+        <GeneralForm
+          setGeneralForm={ setGeneralFormFunc }
+          setGeneralValid={ validGeneralFormFunc }
+          setGeneralInvalid={ invalidGeneralFormFunc }
+          apiRes={{
+            contactInformation: {
+              telephoneOne: user.message['contactInformation.telephoneOne'],
+              telephoneTwo: user.message['contactInformation.telephoneTwo'],
+            },
+            addresInformation: {
+              cep: user.message['addresInformation.cep'],
+              city: user.message['addresInformation.city'],
+              country: user.message['addresInformation.country'],
+              neiborhood: user.message['addresInformation.neiborhood'],
+              publicPlace: user.message['addresInformation.publicPlace'],
+              state: user.message['addresInformation.state'],
+            }
+          }}
+        />
           <Row className="justify-content-md-center">
             <Col xs lg="10">
               <Form>
@@ -170,10 +194,10 @@ export default function Home() {
           </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
-            <Button onClick={ () => handleSubmit() } disabled={ button } variant="primary" type="button">
-                { carregando ? 'Carregando...' : 'Cadastrar' }
+            <Button onClick={ () => handleSubmit() } variant="primary" type="button">
+                { carregando ? 'Carregando...' : 'Atualizar Informações' }
             </Button>
-            <Link href='/'>
+            <Link href={`/responsible/${router.query.id}`}>
               <Button className='mx-5' variant="success" type="button">
                   { '< Voltar' }
               </Button>
@@ -181,6 +205,6 @@ export default function Home() {
           </Col>
         </Row>
       </Row>
-    </Container>
+    </Container> : <h1>Carregando...</h1>
   )
 }

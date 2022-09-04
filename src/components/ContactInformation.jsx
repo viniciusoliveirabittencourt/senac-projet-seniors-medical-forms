@@ -2,9 +2,9 @@ import { Row, Col, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Telephone from './Telephone';
 
-export default function ContactInformation ({ setContact, setEmailValid, setEmailInvalid }) {
-  const [telephoneOne, setTelephoneOne] = useState('');
-  const [telephoneTwo, setTelephoneTwo] = useState('');
+export default function ContactInformation ({ setContact, setContactValid, setContactInvalid, apiRes }) {
+  const [telephoneOne, setTelephoneOne] = useState(apiRes.telephoneOne);
+  const [telephoneTwo, setTelephoneTwo] = useState(apiRes.telephoneTwo);
   const [telephoneValid, setTelephoneValid] = useState(false);
 
   useEffect(() => {
@@ -12,8 +12,11 @@ export default function ContactInformation ({ setContact, setEmailValid, setEmai
       telephoneOne,
       telephoneTwo,
     });
-    telephoneValid ? setEmailValid() : setEmailInvalid();
-  }, [telephoneOne, telephoneTwo])
+  }, [telephoneOne, telephoneTwo]);
+
+  useEffect(() => {
+    telephoneValid ? setContactValid() : setContactInvalid();
+  }, [telephoneValid]);
 
   const telephoneOneHandler = (e) => {
     setTelephoneOne(e);
@@ -36,6 +39,7 @@ export default function ContactInformation ({ setContact, setEmailValid, setEmai
       <Col xs lg="5">
         <Form>
           <Telephone
+            value={ apiRes.telephoneOne }
             required={ true }
             invalidTelephone={ invalidTelephone }
             validTelephone={ validTelephone }
@@ -47,6 +51,7 @@ export default function ContactInformation ({ setContact, setEmailValid, setEmai
       <Col xs lg="5">
         <Form>
           <Telephone
+           value={ apiRes.telephoneTwo }
             required={ false }
             invalidTelephone={ invalidTelephone }
             validTelephone={ validTelephone }

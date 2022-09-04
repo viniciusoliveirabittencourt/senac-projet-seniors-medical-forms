@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function Neiborhood ({ neiborhoodHandler, setValidneiborhood, setInvalidneiborhood }) {
-  const [neiborhood, setneiborhood] = useState('');
+export default function Neiborhood ({ neiborhoodHandler, setValidneiborhood, setInvalidneiborhood, value }) {
+  console.log(value);
+  const [neiborhood, setneiborhood] = useState(value);
   const [neiborhoodValid, setneiborhoodValid] = useState(false);
   const neiborhoodLength = neiborhood.length < 3 || neiborhood.length > 56;
   useEffect(() => {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function City ({ CityHandler, setValidCity, setInvalidCity }) {
-  const [City, setCity] = useState('');
+export default function City ({ CityHandler, setValidCity, setInvalidCity, value }) {
+  const [City, setCity] = useState(value);
   const [CityValid, setCityValid] = useState(false);
   const CityLength = City.length < 3 || City.length > 56;
   useEffect(() => {

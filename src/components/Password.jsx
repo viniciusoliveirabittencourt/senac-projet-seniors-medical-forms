@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Form } from 'react-bootstrap';
 
-export default function Password ({ passwordHandler, setValidPassword, setInvalidPassword }) {
-  const [password, setPassword] = useState('');
+export default function Password ({ passwordHandler, setValidPassword, setInvalidPassword, value }) {
+  const [password, setPassword] = useState(value ? value : '');
   const [passwordValid, setPasswordValid] = useState(true);
   const [seePassword, setSeePassword] = useState('password');
   const [colorSeePass, setColorSeePass] = useState('');

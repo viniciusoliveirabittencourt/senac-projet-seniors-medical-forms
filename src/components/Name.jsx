@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function Name ({ nameHandler, setValidname, setInvalidname }) {
-  const [name, setname] = useState('');
+export default function Name ({ nameHandler, setValidname, setInvalidname, value }) {
+  const [name, setname] = useState(value);
   const [nameValid, setnameValid] = useState(false);
   const nameLength = name.length < 8;
 

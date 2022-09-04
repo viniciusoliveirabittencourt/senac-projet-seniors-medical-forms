@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function Country ({ countryHandler, setValidcountry, setInvalidcountry }) {
-  const [country, setcountry] = useState('');
+export default function Country ({ countryHandler, setValidcountry, setInvalidcountry, value }) {
+  const [country, setcountry] = useState(value);
   const [countryValid, setcountryValid] = useState(false);
   const countryLength = country.length < 3 || country.length > 56;
   useEffect(() => {

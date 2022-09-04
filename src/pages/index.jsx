@@ -1,10 +1,12 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Email from '../components/Email';
 import Password from '../components/Password';
+import axios from 'axios';
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   return {
     props: {},
   }
@@ -16,6 +18,9 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [validPassword, setValidPassword] = useState(false);
   const [button, setButton] = useState(true);
+  const [carregando, setCarregando] = useState(false);
+  const [serverMessage, setServerMessage] = useState('');
+  const router = useRouter();
 
   const buttonHandler = () => {
     if (validEmail && validPassword) {
@@ -24,6 +29,23 @@ export default function Home() {
       setButton(true);
     }
   };
+
+  const requestSubmit = async () => {
+    try {
+      setCarregando(true);
+      const body = {
+        email,
+        password
+      }
+      await axios.post('/api/login', body, { headers: { 'Content-Type': 'application/json' } });
+      router.push(`/responsible/${email}`);
+      setCarregando(false);
+    } catch (e) {
+      console.log(e);
+      setServerMessage(e.response.data.message);
+      setCarregando(false);
+    }
+  }
 
   useEffect(() => {
     buttonHandler();
@@ -57,8 +79,13 @@ export default function Home() {
     <Container>
       <Row className="justify-content-md-center">
         <Row className="justify-content-md-center">
-          <Col xs lg="2">
+          <Col xs lg="5">
             <h1>Login:</h1>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs lg="5">
+            <h3 className='red'>{ serverMessage }</h3>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
@@ -67,8 +94,8 @@ export default function Home() {
             <Email setInvalidEmail={ setEmaiInvalid } setValidEmail={ setEmailValid } emailHandler={ handlerEmail } />
             <Password setInvalidPassword={ setPasswordInvalid } setValidPassword={ setPasswordValid } passwordHandler={ handlerPassword } />
             </Form>
-            <Button className='mb-3' disabled={ button } variant="primary" type="button">
-              Logar
+            <Button onClick={ () => requestSubmit() } className='mb-3' disabled={ button } variant="primary" type="button">
+              { carregando ? 'Carregando...' : 'Logar' }
             </Button>
             <div>
               <p><Link href='/responsible/create'>Ainda não é cadastrado ? Cadastre-se</Link></p>

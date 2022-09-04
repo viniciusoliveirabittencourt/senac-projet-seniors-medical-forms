@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function PublicPlace ({ publicPlaceHandler, setValidpublicPlace, setInvalidpublicPlace }) {
-  const [publicPlace, setpublicPlace] = useState('');
+export default function PublicPlace ({ publicPlaceHandler, setValidpublicPlace, setInvalidpublicPlace, value }) {
+  const [publicPlace, setpublicPlace] = useState(value);
   const [publicPlaceValid, setpublicPlaceValid] = useState(false);
   const publicPlaceLength = publicPlace.length < 5;
   useEffect(() => {

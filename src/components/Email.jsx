@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function emailInput ({ emailHandler, setValidEmail, setInvalidEmail }) {
-  const [email, setEmail] = useState('');
+export default function emailInput ({ emailHandler, setValidEmail, setInvalidEmail, value }) {
+  const [email, setEmail] = useState(value ? value : '');
   const [emailValid, setEmailValid] = useState(false);
   const emailRegex = /\S+@\S+\.\S+/;
   const emailValidate = emailRegex.test(email);

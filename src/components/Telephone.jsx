@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { IMaskInput } from 'react-imask';
 
-export default function Telephone({ telephone, handlerTelephone, invalidTelephone, validTelephone, required }) {
-  const [telephoneState, setTelephoneState] = useState('');
+export default function Telephone({ telephone, handlerTelephone, invalidTelephone, validTelephone, required, value }) {
+  const [telephoneState, setTelephoneState] = useState(value);
   const telephoneValidate = telephoneState.length !== 16;
 
   useEffect(() => {

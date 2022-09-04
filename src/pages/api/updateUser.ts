@@ -2,7 +2,6 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Db } from 'mongodb';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
-import upload from '../../database/upload';
 
 let cachedDb: Db = null;
 
@@ -11,30 +10,24 @@ if (!cachedDb) {
 }
 
 const handler = nc()
-  .use(upload.single('file'))
-  .post(async (req: VercelRequest, res: VercelResponse) => {
+  .put(async (req: VercelRequest, res: VercelResponse) => {
     const body = req.body;
-    console.log(req.file.location);
+    const { id } = req.headers;
+    console.log(body);
 
     const db = await connectToDatabase(process.env.MONGO_URI);
 
     const collection = db.collection('responsibles');
 
-    delete body.file;
-
-    body.photo = req.file.location;
-
-    const returnUser = await collection.insertOne({ ...body });
+    const returnUser = await collection.replaceOne({ email: id }, body);
 
     console.log(returnUser);
 
-    return res.status(201).json({ ok: true, id: returnUser });
-  });
+    if (!returnUser) {
+      return res.status(400).send({ ok: false, message: 'Usuario não existe!' })
+    }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  }
-}
+    return res.status(200).send({ ok: true, message: returnUser });
+  });
 
 export default handler;

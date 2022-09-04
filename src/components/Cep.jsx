@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { IMaskInput } from 'react-imask';
 
-export default function Cep({ handlercep, invalidcep, validcep}) {
-  const [cepState, setcepState] = useState('');
+export default function Cep({ handlercep, invalidcep, validcep, value }) {
+  const [cepState, setcepState] = useState(value);
   const cepValidate = cepState.length !== 9;
 
   useEffect(() => {
