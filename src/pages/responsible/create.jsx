@@ -40,7 +40,7 @@ export default function Home() {
         ...generalForm,
         mySeniors: []
       }
-      await axios.post('/api/createResponsible', body, { headers: { 'Content-Type': 'multipart/form-data' } });
+      await axios.post('/api/createResponsible', body, { headers: { 'Content-Type': 'multipart/form-data', 'Cache-Control': 'max-age=9999' } });
       router.push('/')
       setCarregando(false);
     } catch (e) {

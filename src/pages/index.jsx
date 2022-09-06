@@ -37,7 +37,7 @@ export default function Home() {
         email,
         password
       }
-      await axios.post('/api/login', body, { headers: { 'Content-Type': 'application/json' } });
+      await axios.post('/api/login', body, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'max-age=9999' } });
       router.push(`/responsible/${email}`);
       setCarregando(false);
     } catch (e) {
