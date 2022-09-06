@@ -10,23 +10,20 @@ if (!cachedDb) {
 }
 
 const handler = nc()
-  .post(async (req: VercelRequest, res: VercelResponse) => {
-    const { email } = req.body;
-    console.log(req.body);
+  .get(async (req: VercelRequest, res: VercelResponse) => {
+    const { id } = req.headers;
 
     const db = await connectToDatabase(process.env.MONGO_URI);
 
-    const collection = db.collection('responsibles');
-    const collectionTwo = db.collection('seniors');
+    const collection = db.collection('seniors');
 
-    const returnUser = await collection.findOne({ email });
-    const returnSenior = await collectionTwo.find({ myResponsible: email }).toArray();
+    const returnUser = await collection.findOne({ _id: id });
 
     if (!returnUser) {
       return res.status(400).send({ ok: false, message: 'Usuario não existe!' })
     }
 
-    return res.status(200).send({ ok: true, message: returnUser, mySenior: returnSenior});
+    return res.status(200).send({ ok: true, message: returnUser, mySenior: returnUser});
   });
 
 export default handler;

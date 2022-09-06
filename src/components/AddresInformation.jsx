@@ -18,7 +18,7 @@ export default function AddresInformation ({ setAddres, setAddresValid, setAddre
   const [validNeiborhood, setValidNeiborhood] = useState(false);
   const [publicPlace, setPublicPlace] = useState(apiRes.publicPlace);
   const [validPublicPlace, setValidPublicPlace] = useState(false);
-  const [cep, setCep] = useState(apiRes.state);
+  const [cep, setCep] = useState(apiRes.cep);
   const [validCep, setValidCep] = useState(false);
 
   useEffect(() => {

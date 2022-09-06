@@ -4,7 +4,6 @@ import ContactInformation from './ContactInformation';
 import AddresInformation from './AddresInformation';
 
 export default function GeneralForm ({ setGeneralForm, setGeneralValid, setGeneralInvalid, apiRes }) {
-  console.log(apiRes);
   const [contactInform, setContactInforma] = useState({});
   const [validContact, setValidContact] = useState(false);
   const [AddresInformationState, setAddresInformationState] = useState({});

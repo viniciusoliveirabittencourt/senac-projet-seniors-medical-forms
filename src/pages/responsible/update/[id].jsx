@@ -19,7 +19,6 @@ export default function Home() {
   const [validName, setValidName] = useState(false);
   const [generalForm, setGeneralForm] = useState({});
   const [validGeneralForm, setValidGeneralForm] = useState(false);
-  const [file, setFile] = useState();
   const [carregando, setCarregando] = useState(false);
   const router = useRouter();
   console.log(user);
@@ -182,16 +181,6 @@ export default function Home() {
             }
           }}
         />
-          <Row className="justify-content-md-center">
-            <Col xs lg="10">
-              <Form>
-                <Form.Group className="mb-3">
-                  <Form.Label>Sua Foto:</Form.Label>
-                  <Form.Control onChange={ (e) => setFile(e.target.files[0]) } type='file'/>
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
             <Button onClick={ () => handleSubmit() } variant="primary" type="button">
