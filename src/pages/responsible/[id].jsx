@@ -62,7 +62,9 @@ export default function Overview () {
         <Link href={ `/responsible/senior/update/${ i._id }` }>
           <h6  className='fraseCard pointer'>{ i.name }</h6>
         </Link>
-        <img className='qr mx-3 pointer' src='https://cdn-icons-png.flaticon.com/512/747/747470.png' />
+        <Link href={ `/responsible/senior/qr/${ i._id }` }>
+          <img className='qr mx-3 pointer' src='https://cdn-icons-png.flaticon.com/512/747/747470.png' />
+        </Link>
         <Button onClick={ () => handleOpenAndSetId(i._id) } variant='danger'>
             { 'X' }
         </Button>
