@@ -22,6 +22,8 @@ export default function Home() {
   const [serverMessage, setServerMessage] = useState('');
   const router = useRouter();
 
+  console.log(process.env.MONGO_URI);
+
   const buttonHandler = () => {
     if (validEmail && validPassword) {
       setButton(false);
