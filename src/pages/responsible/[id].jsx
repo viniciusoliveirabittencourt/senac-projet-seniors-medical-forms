@@ -56,7 +56,7 @@ export default function Overview () {
 
     return user.mySenior.map((i, j) => {
       return <div key={ j } className='cardmy mb-3 my-3 pointer'>
-        <Link href={ `/responsible/senior/create/${ i._id }` }>
+        <Link href={ `/responsible/senior/update/${ i._id }` }>
           <img src={ i.photo } className='photoCard pointer' />
         </Link>
         <Link href={ `/responsible/senior/update/${ i._id }` }>
