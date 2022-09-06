@@ -169,7 +169,7 @@ export default function Home() {
           </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
-            <Button onClick={ () => handleSubmit() } disabled={ button } variant="primary" type="button">
+            <Button onClick={ () => handleSubmit() } variant="primary" type="button">
                 { carregando ? 'Carregando...' : 'Cadastrar' }
             </Button>
             <Link href='/'>
