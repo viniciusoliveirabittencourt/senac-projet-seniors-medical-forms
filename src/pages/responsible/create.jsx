@@ -31,7 +31,6 @@ export default function Home() {
   const handleSubmit = async () => {
     try {
       setCarregando(true);
-      const mySeniors = [];
       const body = {
         file,
         email,
@@ -40,7 +39,7 @@ export default function Home() {
         ...generalForm,
         mySeniors: []
       }
-      await axios.post('/api/createResponsible', body, { headers: { 'Content-Type': 'multipart/form-data', 'Cache-Control': 'no-cache' } });
+      await axios.post('/api/createResponsible', body, { headers: { 'Content-Type': 'multipart/form-data' } });
       router.push('/')
       setCarregando(false);
     } catch (e) {
