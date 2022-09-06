@@ -1,4 +1,3 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
 
@@ -9,10 +8,10 @@ if (!cachedDb) {
 }
 
 const handler = nc()
-  .get(async (req: VercelRequest, res: VercelResponse) => {
+  .get(async (req, res) => {
     const { id } = req.headers;
 
-    const db = await connectToDatabase(process.env.MONGO_URI);
+    const db = await connectToDatabase();
 
     const collection = db.collection('seniors');
 

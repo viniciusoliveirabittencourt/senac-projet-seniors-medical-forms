@@ -1,7 +1,8 @@
 import { MongoClient } from 'mongodb';
 import url from 'url';
 
-const connectToDatabase = async (uri: string = undefined) => {
+const connectToDatabase = async () => {
+  const uri = process.env.MONGO_URI;
   const client = await MongoClient.connect(uri);
 
   const dbName = url.parse(uri).pathname.substring(1);

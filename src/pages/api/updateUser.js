@@ -1,4 +1,3 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
 
@@ -9,16 +8,15 @@ if (!cachedDb) {
 }
 
 const handler = nc()
-  .put(async (req: VercelRequest, res: VercelResponse) => {
+  .put(async (req, res) => {
     const body = req.body;
     const { id } = req.headers;
-    console.log(id);
 
-    const db = await connectToDatabase(process.env.MONGO_URI);
+    const db = await connectToDatabase();
 
-    const collection = db.collection('seniors');
+    const collection = db.collection('responsibles');
 
-    const returnUser = await collection.replaceOne({ _id: id }, body);
+    const returnUser = await collection.replaceOne({ email: id }, body);
 
     console.log(returnUser);
 

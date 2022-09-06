@@ -1,4 +1,3 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
 
@@ -9,14 +8,21 @@ if (!cachedDb) {
 }
 
 const handler = nc()
-  .delete(async (req: VercelRequest, res: VercelResponse) => {
+  .put(async (req, res) => {
+    const body = req.body;
     const { id } = req.headers;
 
-    const db = await connectToDatabase(process.env.MONGO_URI);
+    const db = await connectToDatabase();
 
     const collection = db.collection('seniors');
 
-    const returnUser = await collection.deleteOne({ _id: id });
+    const returnUser = await collection.replaceOne({ _id: id }, body);
+
+    console.log(returnUser);
+
+    if (!returnUser) {
+      return res.status(400).send({ ok: false, message: 'Usuario não existe!' })
+    }
 
     return res.status(200).send({ ok: true, message: returnUser });
   });
