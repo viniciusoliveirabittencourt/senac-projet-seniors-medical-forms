@@ -94,7 +94,7 @@ export default function Home() {
             <Email setInvalidEmail={ setEmaiInvalid } setValidEmail={ setEmailValid } emailHandler={ handlerEmail } />
             <Password setInvalidPassword={ setPasswordInvalid } setValidPassword={ setPasswordValid } passwordHandler={ handlerPassword } />
             </Form>
-            <Button onClick={ () => requestSubmit() } className='mb-3' disabled={ button } variant="primary" type="button">
+            <Button onClick={ () => requestSubmit() } className='mb-3' variant="primary" type="button">
               { carregando ? 'Carregando...' : 'Logar' }
             </Button>
             <div>

@@ -236,7 +236,7 @@ export default function CreateSenior() {
           </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
-            <Button className='mb-5' onClick={ () => handleSubmit() } disabled={ button } variant="primary" type="button">
+            <Button className='mb-5' onClick={ () => handleSubmit() } variant="primary" type="button">
                 { carregando ? 'Carregando...' : 'Cadastrar' }
             </Button>
             <Link href={ `/responsible/${router.query.id}` }>
