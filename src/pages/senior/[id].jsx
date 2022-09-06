@@ -264,6 +264,17 @@ export default function Senior () {
         </Row>
         <Row className="justify-content-md-center">
           <Col xs lg="10">
+            <h2>Informações médicas -</h2>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs lg="10">
+            <h4>Lesão por pressão:</h4>
+            <p>{ user.pressureInjure }</p>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs lg="10">
             <h4>Diagnosticos:</h4>
             <p>{ createArr(user.diagnoses, 'Este pacienten não possuí diagnosticos.', 'Diagnostico') }</p>
           </Col>
