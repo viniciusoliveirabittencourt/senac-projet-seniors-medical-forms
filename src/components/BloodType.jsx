@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function bloodType({ value, setBloodTypeFunc }) {
+export default function BloodType({ value, setBloodTypeFunc }) {
   const [bloodType, setBloodType] = useState(value);
 
   useEffect(() => {

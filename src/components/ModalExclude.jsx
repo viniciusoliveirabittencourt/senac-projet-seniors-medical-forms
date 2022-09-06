@@ -19,7 +19,7 @@ export default function ModalExclude({ show, handleClose, excludSenior, carregan
           <Modal.Title>Realmente deseja excluir esse idoso ?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Para excluir esse idoso, digite "<em>excluir</em>"
+          Para excluir esse idoso, digite <em>excluir</em>
           <Form>
             <Form.Group>
               <Form.Control onChange={ (e) => setInput(e.target.value) } type='text' placeholder='excluir' />

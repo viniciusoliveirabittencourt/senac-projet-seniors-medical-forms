@@ -67,7 +67,7 @@ export default function Senior () {
       return <p>{ message }</p>
     }
 
-    return arr.map((i) => <Col className="line" xs lg="5">
+    return arr.map((i, j) => <Col key={ j } className="line" xs lg="5">
         <h6>{ label }:</h6>
         <p>{ i.information }</p>
         <h6>Observação:</h6>
@@ -80,7 +80,7 @@ export default function Senior () {
       return <p>{ message }</p>
     }
 
-    return arr.map((i) => <Col className="line" xs lg="5">
+    return arr.map((i, j) => <Col key={ j } className="line" xs lg="5">
         <h6>{ label }:</h6>
         <p>{ i.information }</p>
         <h6>Horário:</h6>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function gender({ value, setGenderFunc }) {
+export default function Gender({ value, setGenderFunc }) {
   const [gender, setGender] = useState(value);
 
   useEffect(() => {

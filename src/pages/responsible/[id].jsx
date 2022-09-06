@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ModalExclude from '../../components/ModalExclude';
 
-export default function overview () {
+export default function Overview () {
   const [user, setUser] = useState();
   const [carregando, setCarregando] = useState(false);
   const [id, setId] = useState();

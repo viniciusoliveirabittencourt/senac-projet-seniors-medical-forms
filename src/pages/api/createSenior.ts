@@ -4,10 +4,14 @@ import connectToDatabase from '../../database';
 import nc from 'next-connect';
 import upload from '../../database/upload';
 
-let cachedDb: Db = null;
+let cachedDb = null;
 
 if (!cachedDb) {
   cachedDb = connectToDatabase();
+}
+
+interface MulterRequest extends VercelRequest {
+  file: any;
 }
 
 const handler = nc()
@@ -21,11 +25,11 @@ const handler = nc()
 
     delete body.file;
 
-    body.photo = req.file.location;
+    body.photo = (req as MulterRequest).file.location;
 
     const returnUser = await collection.insertOne({ ...body });
 
-    return res.status(201).json({ ok: true, id: returnUser, reqFileLocation: req.file.location });
+    return res.status(201).json({ ok: true, id: returnUser, reqFileLocation: (req as MulterRequest).file.location });
   });
 
 export const config = {

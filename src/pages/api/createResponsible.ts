@@ -1,20 +1,22 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { Db } from 'mongodb';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
 import upload from '../../database/upload';
 
-let cachedDb: Db = null;
+let cachedDb = null;
 
 if (!cachedDb) {
   cachedDb = connectToDatabase();
+}
+
+interface MulterRequest extends VercelRequest {
+  file: any;
 }
 
 const handler = nc()
   .use(upload.single('file'))
   .post(async (req: VercelRequest, res: VercelResponse) => {
     const body = req.body;
-    console.log(req.file.location);
 
     const db = await connectToDatabase(process.env.MONGO_URI);
 
@@ -22,7 +24,7 @@ const handler = nc()
 
     delete body.file;
 
-    body.photo = req.file.location;
+    body.photo = (req as MulterRequest).file.location;
 
     const returnUser = await collection.insertOne({ ...body });
 

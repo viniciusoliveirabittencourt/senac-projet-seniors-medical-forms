@@ -1,9 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { Db } from 'mongodb';
 import connectToDatabase from '../../database';
 import nc from 'next-connect';
 
-let cachedDb: Db = null;
+let cachedDb = null;
 
 if (!cachedDb) {
   cachedDb = connectToDatabase();

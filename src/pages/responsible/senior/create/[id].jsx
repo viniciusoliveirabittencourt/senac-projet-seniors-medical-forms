@@ -7,7 +7,7 @@ import PersonalInformationInformation from '../../../../components/PersonalInfor
 import InformationArray from '../../../../components/InformationArray';
 import axios from 'axios';
 
-export default function createSenior() {
+export default function CreateSenior() {
   const [button, setButton] = useState(true);
   const [generalForm, setGeneralForm] = useState({});
   const [validGeneralForm, setValidGeneralForm] = useState(false);
