@@ -239,7 +239,7 @@ export default function CreateSenior() {
             <Button className='mb-5' onClick={ () => handleSubmit() } disabled={ button } variant="primary" type="button">
                 { carregando ? 'Carregando...' : 'Cadastrar' }
             </Button>
-            <Link href='/'>
+            <Link href={ `/responsible/${router.query.id}` }>
               <Button className='mx-5 mb-5' variant="success" type="button">
                   { '< Voltar' }
               </Button>

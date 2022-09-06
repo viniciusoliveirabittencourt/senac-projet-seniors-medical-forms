@@ -27,7 +27,7 @@ export default function QrCode() {
       <Row className="justify-content-md-center">
         <Col xs lg="5">
           <h2>Qr Code do idoso!</h2>
-          <img className='mb-3' src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senac-projet-seniors.vercel.app/${router.query.id}`} />
+          <img className='mb-3' src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senac-projet-seniors.vercel.app/senior/${router.query.id}`} />
           <Col>
             <Link href={ `/responsible/${getResponsible()}` }>
               <Button size='lg' variant='success'>
