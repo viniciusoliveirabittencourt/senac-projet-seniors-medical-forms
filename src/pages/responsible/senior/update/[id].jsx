@@ -87,9 +87,16 @@ export default function UpdateSenior() {
       setCarregando(true);
       const body = {
         _id: user._id,
-        ...personalInformation,
+        name: personalInformation.name,
+        birthday: personalInformation.birthday,
+        healthPlan: personalInformation.healthPlan,
+        gender: personalInformation.gender,
+        height: personalInformation.height,
+        weigth: personalInformation.weigth,
+        bloodType: personalInformation.bloodType,
         addresInformation: { ...generalForm.addresInformation },
         contactInformation: { ...generalForm.contactInformation },
+        pressureInjury,
         diagnoses,
         allergies,
         devices,

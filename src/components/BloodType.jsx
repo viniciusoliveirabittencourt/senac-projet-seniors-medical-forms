@@ -10,7 +10,7 @@ export default function BloodType({ value, setBloodTypeFunc }) {
 
   return (
     <Form.Group className="mb-3" controlId="formBasicHealpPlan">
-      <Form.Label>Gênero:</Form.Label>
+      <Form.Label>Tipo sanguíneo:</Form.Label>
       <Form.Select value={ bloodType } onChange={ (e) => setBloodType(e.target.value) }>
         <option value='Não identificado / Não deseja Transfusão'>Não identificado / Não deseja tranfusão</option>
         <option value='A+'>A+</option>
