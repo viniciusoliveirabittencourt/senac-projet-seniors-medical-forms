@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 
 export default function Senior () {
   const [user, setUser] = useState();
+  console.log(user);
   const [responsible, setResponsible] = useState();
   const router = useRouter();
 
